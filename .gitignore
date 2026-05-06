@@ -1,0 +1,6 @@
+*.DS_Store
+*.rar
+*.zip
+*.7z
+node_modules/
+.env
