@@ -1,464 +1,355 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Mão Esquerda do Cosmos – Herdeiros da Luz | Nélio Correia da Silva Filho</title>
-  <meta name="description" content="A Mão Esquerda do Cosmos: Herdeiros da Luz — de Nélio Correia da Silva Filho. Ouça o audiobook completo grátis, adquira o livro físico ou digital." />
-  <meta property="og:title" content="A Mão Esquerda do Cosmos – Herdeiros da Luz" />
-  <meta property="og:description" content="Uma épica jornada de fantasia cósmica. Audiobook completo gratuito." />
-  <meta property="og:image" content="assets/capa.jpg" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Mão Esquerda do Cosmos – Herdeiros da Luz | Nélio Correia</title>
+  <meta name="description" content="Uma saga épica de fantasia que une mundos, heranças e o poder ancestral do cosmos. Audiobook completo gratuito para degustação. Compre o livro impresso ou digital.">
+  <meta property="og:title" content="A Mão Esquerda do Cosmos – Herdeiros da Luz">
+  <meta property="og:description" content="Uma saga épica de fantasia. 706 páginas, 175 capítulos. Audiobook gratuito para degustação.">
+  <meta property="og:image" content="https://www.genspark.ai/api/files/s/YvWZIqoe?cache_control=3600">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas id="starsCanvas"></canvas>
+<div id="particles"></div>
 
-  <canvas id="stars"></canvas>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span>A Mão Esquerda do Cosmos</span>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#audiobook">Audiobook</a>
+      <a href="#comprar">Comprar</a>
+      <a href="#autor">Autor</a>
+    </div>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#sobre" onclick="closeMobile()">Sobre o Livro</a>
+    <a href="#audiobook" onclick="closeMobile()">Audiobook</a>
+    <a href="#comprar" onclick="closeMobile()">Onde Comprar</a>
+    <a href="#autor" onclick="closeMobile()">O Autor</a>
+  </div>
+</nav>
 
-  <!-- ═══ NAVBAR ═══ -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <div class="nav-logo">
-        <img src="assets/capa.jpg" alt="Capa" class="nav-book-thumb" />
-        <span class="logo-text">✦ A Mão Esquerda do Cosmos</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#autor">Autor</a></li>
-        <li><a href="#audiobook">Audiobook</a></li>
-        <li><a href="#comprar">Adquirir</a></li>
-      </ul>
-      <a href="#comprar" class="nav-cta">
-        <i class="fas fa-shopping-cart"></i> Comprar
-      </a>
-      <button class="nav-burger" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg">
+    <img src="https://www.genspark.ai/api/files/s/8iQLy4WW?cache_control=3600" alt="cosmos background" class="hero-bg-img">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ SAGA ÉPICA DE FANTASIA ✦</div>
+    <h1 class="hero-title">
+      <span class="title-line-1">A Mão Esquerda</span>
+      <span class="title-line-2">do Cosmos</span>
+      <span class="title-line-3">Herdeiros da Luz</span>
+    </h1>
+    <p class="hero-author">por <strong>Nélio Correia da Silva Filho</strong></p>
+    <p class="hero-tagline">"Entre a escuridão e a luz, há uma mão capaz de reescrever o destino do cosmos."</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-number">706</span><span class="stat-label">Páginas</span></div>
+      <div class="stat-divider">✦</div>
+      <div class="stat"><span class="stat-number">175</span><span class="stat-label">Capítulos</span></div>
+      <div class="stat-divider">✦</div>
+      <div class="stat"><span class="stat-number">2</span><span class="stat-label">Partes</span></div>
     </div>
-    <div class="nav-mobile" id="navMobile">
-      <a href="#sobre" onclick="toggleMenu()">Sobre</a>
-      <a href="#autor" onclick="toggleMenu()">Autor</a>
-      <a href="#audiobook" onclick="toggleMenu()">Audiobook</a>
-      <a href="#comprar" onclick="toggleMenu()">Adquirir</a>
-    </div>
-  </nav>
-
-  <!-- ═══ HERO ═══ -->
-  <section id="hero">
-    <div class="hero-particles" id="heroParticles"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <div class="hero-badge animate-in delay-1">
-        <i class="fas fa-star"></i>&nbsp; FANTASIA ÉPICA · FICÇÃO CIENTÍFICA
-      </div>
-      <h1 class="hero-title animate-in delay-2">
-        <span class="t1">A Mão Esquerda</span>
-        <span class="t2">do Cosmos</span>
-        <span class="t3">Herdeiros da Luz</span>
-      </h1>
-      <p class="hero-author animate-in delay-3">
-        <i class="fas fa-pen-fancy"></i>&nbsp; Nélio Correia da Silva Filho
-      </p>
-      <p class="hero-desc animate-in delay-4">
-        Em um mundo de sombras e dogmas, dois jovens descobrem que o cosmos guarda segredos maiores do que qualquer fortaleza pode conter. Uma jornada épica de liberdade, magia e destino.
-      </p>
-      <div class="hero-actions animate-in delay-5">
-        <a href="#audiobook" class="btn-primary">
-          <i class="fas fa-headphones-alt"></i> Ouvir Audiobook Grátis
-        </a>
-        <a href="#comprar" class="btn-outline">
-          <i class="fas fa-book"></i> Adquirir o Livro
-        </a>
-      </div>
-    </div>
-    <div class="hero-book animate-in delay-3">
-      <div class="book-wrapper">
-        <div class="book-3d">
-          <img src="assets/capa.jpg" alt="A Mão Esquerda do Cosmos – Herdeiros da Luz" class="book-img" />
-          <div class="book-spine"></div>
-          <div class="book-reflect"></div>
-        </div>
-        <div class="book-shadow"></div>
-      </div>
-      <div class="buy-quick">
-        <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank" class="quick-btn">
-          <i class="fas fa-book"></i> Livro Físico
-        </a>
-        <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-ebook-pdf/" target="_blank" class="quick-btn pdf">
-          <i class="fas fa-file-pdf"></i> E-book PDF
-        </a>
-      </div>
-    </div>
-    <div class="hero-scroll-indicator">
-      <span>Descobrir mais</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ═══ FAIXA DE STATS ═══ -->
-  <div class="stats-band">
-    <div class="stat-item">
-      <span class="stat-n" data-count="706">0</span>
-      <span class="stat-l">Páginas</span>
-    </div>
-    <div class="stat-div"></div>
-    <div class="stat-item">
-      <span class="stat-n" data-count="175">0</span>
-      <span class="stat-l">Capítulos</span>
-    </div>
-    <div class="stat-div"></div>
-    <div class="stat-item">
-      <span class="stat-n" data-count="2">0</span>
-      <span class="stat-l">Partes</span>
-    </div>
-    <div class="stat-div"></div>
-    <div class="stat-item">
-      <span class="stat-n">100%</span>
-      <span class="stat-l">Audiobook Grátis</span>
+    <div class="hero-cta">
+      <a href="#audiobook" class="btn-primary"><i class="fas fa-headphones"></i> Ouvir Audiobook Grátis</a>
+      <a href="#comprar" class="btn-secondary"><i class="fas fa-shopping-cart"></i> Comprar o Livro</a>
     </div>
   </div>
-
-  <!-- ═══ SOBRE O LIVRO ═══ -->
-  <section id="sobre">
-    <div class="container">
-      <div class="sec-header">
-        <div class="sec-line"></div>
-        <h2 class="sec-title">Sobre a Obra</h2>
-        <div class="sec-line"></div>
+  <div class="hero-book">
+    <div class="book-3d">
+      <div class="book-face book-front">
+        <img src="assets/capa.jpg" alt="Capa do livro A Mão Esquerda do Cosmos" onerror="this.src='https://www.genspark.ai/api/files/s/DUOEhpXX'">
       </div>
-      <div class="sobre-grid">
-        <div class="sobre-cover reveal">
-          <img src="assets/capa.jpg" alt="Capa do livro" class="sobre-capa" />
-          <div class="sobre-cover-glow"></div>
-          <div class="sobre-isbn">
-            <i class="fas fa-barcode"></i> ISBN: 9786558908272
-          </div>
+      <div class="book-face book-side"></div>
+      <div class="book-face book-back"></div>
+    </div>
+    <div class="book-shadow"></div>
+  </div>
+  <div class="hero-scroll">
+    <span>Role para explorar</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-ornament">✦ ✦ ✦</div>
+      <h2 class="section-title">Sobre o Livro</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <blockquote class="sobre-quote">
+          <span class="quote-mark">"</span>Em um universo onde a luz e a sombra são faces da mesma moeda, um grupo de jovens guerreiros descobre que carregam em suas mãos o poder de dobrar a realidade — e o peso de uma herança que pode destruir tudo que conhecem.<span class="quote-mark">"</span>
+        </blockquote>
+        <p>Em um mundo fragmentado entre reinos celestiais e fortalezas das trevas, dois jovens — <strong>Elara</strong> e <strong>Rhys</strong> — descobrem que são portadores de uma herança ancestral ligada ao próprio tecido do cosmos.</p>
+        <p>Guiados pelo enigmático <strong>Mestre Vorlag</strong> e acompanhados pelo leal <strong>Liam</strong>, eles embarcam numa jornada épica que os leva das ruínas de civilizações extintas até as fronteiras do espaço e tempo.</p>
+        <p>Com 706 páginas de narrativa imersiva e 175 capítulos divididos em duas grandes partes, <em>A Mão Esquerda do Cosmos</em> é uma obra que desafia os limites da imaginação.</p>
+        <div class="isbn-badge"><i class="fas fa-barcode"></i> ISBN: 978-65-5890-827-2</div>
+      </div>
+      <div class="sobre-cards">
+        <div class="parte-card">
+          <div class="parte-numero">PARTE I</div>
+          <h3 class="parte-titulo">Ecos do Silêncio</h3>
+          <p>A descoberta dos poderes ancestrais e o início de uma jornada sem retorno pelos reinos do cosmos esquecido.</p>
+          <div class="parte-caps"><i class="fas fa-book-open"></i> Capítulos 0 – 87</div>
         </div>
-        <div class="sobre-content reveal delay-1">
-          <div class="quote-card">
-            <span class="quote-mark">"</span>
-            <p>O frio era uma constante no Santuário Sombrio, uma entidade quase palpável que se infiltrava pelas frestas das pedras ancestrais e roía os ossos dos acólitos com uma persistência maligna. Não era apenas a ausência de calor físico, mas um gelo espiritual...</p>
-            <span class="quote-chap">— Capítulo 1: O Gelo nas Veias</span>
-          </div>
-          <p class="sobre-p">Em <strong>A Mão Esquerda do Cosmos: Herdeiros da Luz</strong>, o leitor é transportado para um universo sombrio e fascinante onde a liberdade é heresia e a curiosidade é crime.</p>
-          <p class="sobre-p"><strong>Elara</strong>, acólita 734 do Santuário Sombrio, nunca conheceu o céu azul — apenas o gelo espiritual imposto pelos seus guardiões. Quando cruza o caminho do misterioso <strong>Rhys</strong>, os dois descobrem que existe um mundo além das muralhas de pedra, e que o cosmos guarda segredos que podem mudar tudo.</p>
-          <p class="sobre-p">Uma narrativa que mistura <strong>fantasia épica, ficção científica e aventura</strong>, explorando temas de identidade, liberdade e o eterno conflito entre luz e sombra.</p>
-          <div class="tags-row">
-            <span class="tag"><i class="fas fa-dragon"></i> Fantasia Épica</span>
-            <span class="tag"><i class="fas fa-rocket"></i> Ficção Científica</span>
-            <span class="tag"><i class="fas fa-star"></i> Aventura</span>
-            <span class="tag"><i class="fas fa-moon"></i> Dark Fantasy</span>
-          </div>
+        <div class="parte-card">
+          <div class="parte-numero">PARTE II</div>
+          <h3 class="parte-titulo">Herdeiros da Luz</h3>
+          <p>A batalha final pelos destinos do universo. Escolhas que definem não apenas vidas, mas a própria existência do cosmos.</p>
+          <div class="parte-caps"><i class="fas fa-book-open"></i> Capítulos 88 – 175</div>
+        </div>
+        <div class="personagens-grid">
+          <div class="personagem"><div class="personagem-avatar elara">E</div><div class="personagem-info"><span class="personagem-nome">Elara</span><span class="personagem-papel">Portadora da Luz</span></div></div>
+          <div class="personagem"><div class="personagem-avatar rhys">R</div><div class="personagem-info"><span class="personagem-nome">Rhys</span><span class="personagem-papel">Guardião das Sombras</span></div></div>
+          <div class="personagem"><div class="personagem-avatar vorlag">V</div><div class="personagem-info"><span class="personagem-nome">Mestre Vorlag</span><span class="personagem-papel">Instrutor Ancestral</span></div></div>
+          <div class="personagem"><div class="personagem-avatar liam">L</div><div class="personagem-info"><span class="personagem-nome">Liam</span><span class="personagem-papel">Aliado Fiel</span></div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Partes -->
-      <div class="partes-row">
-        <div class="parte-card reveal">
-          <div class="parte-num">I</div>
-          <div class="parte-info">
-            <h3>Ecos do Silêncio</h3>
-            <h4>A Fortaleza das Sombras</h4>
-            <p>Elara vive sob a opressão do Santuário Sombrio. Entre treinamentos brutais, catacumbas assombradas e os jogos mentais do Mestre Instrutor Vorlag, ela descobre uma conspiração que ameaça sua vida — e encontra um aliado inesperado nas profundezas.</p>
-          </div>
+<!-- AUDIOBOOK -->
+<section class="audiobook" id="audiobook">
+  <div class="audiobook-bg">
+    <img src="https://www.genspark.ai/api/files/s/RS2F3uTu?cache_control=3600" alt="audiobook bg" class="audiobook-bg-img">
+    <div class="audiobook-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-ornament">♪ ♫ ♪</div>
+      <h2 class="section-title">Audiobook Completo</h2>
+      <p class="section-subtitle">Degustação gratuita — todos os 175 capítulos</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="player-main">
+      <div class="player-cover">
+        <img src="assets/capa.jpg" alt="Capa" id="playerCover" onerror="this.src='https://www.genspark.ai/api/files/s/DUOEhpXX'">
+        <div class="player-cover-overlay">
+          <button class="play-big" id="playBigBtn" onclick="togglePlay()"><i class="fas fa-play" id="playBigIcon"></i></button>
         </div>
-        <div class="parte-card reveal delay-1">
-          <div class="parte-num">II</div>
-          <div class="parte-info">
-            <h3>Herdeiros da Luz</h3>
-            <h4>O Cosmos Revelado</h4>
-            <p>Além das muralhas do Santuário, Elara e Rhys descobrem que o mundo é vasto além de qualquer imaginação. O cosmos guarda herdeiros de uma luz antiga, e os dois são parte de um destino muito maior do que poderiam prever.</p>
+      </div>
+      <div class="player-info">
+        <div class="player-title" id="playerTitle">Capítulo 0 — Prólogo</div>
+        <div class="player-book">A Mão Esquerda do Cosmos</div>
+        <div class="player-author">Nélio Correia da Silva Filho</div>
+        <div class="player-progress-wrap">
+          <span class="player-time" id="currentTime">0:00</span>
+          <div class="player-progress" id="progressBar" onclick="seekAudio(event)">
+            <div class="player-progress-fill" id="progressFill"></div>
+            <div class="player-progress-thumb" id="progressThumb"></div>
+          </div>
+          <span class="player-time" id="totalTime">0:00</span>
+        </div>
+        <div class="player-controls">
+          <button class="ctrl-btn" onclick="prevChapter()" title="Capítulo anterior"><i class="fas fa-step-backward"></i></button>
+          <button class="ctrl-btn" onclick="rewind()" title="Voltar 15s"><i class="fas fa-undo"></i><span class="ctrl-label">15</span></button>
+          <button class="ctrl-btn play-btn" id="playBtn" onclick="togglePlay()"><i class="fas fa-play" id="playIcon"></i></button>
+          <button class="ctrl-btn" onclick="forward()" title="Avançar 15s"><i class="fas fa-redo"></i><span class="ctrl-label">15</span></button>
+          <button class="ctrl-btn" onclick="nextChapter()" title="Próximo capítulo"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <div class="player-extras">
+          <div class="volume-wrap">
+            <i class="fas fa-volume-up" onclick="toggleMute()"></i>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="setVolume(this.value)">
+          </div>
+          <div class="speed-wrap">
+            <span>Velocidade:</span>
+            <select id="speedSelect" onchange="setSpeed(this.value)">
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2.0x</option>
+            </select>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ AUTOR ═══ -->
-  <section id="autor">
-    <div class="container">
-      <div class="sec-header">
-        <div class="sec-line"></div>
-        <h2 class="sec-title">O Autor</h2>
-        <div class="sec-line"></div>
-      </div>
-      <div class="autor-card reveal">
-        <div class="autor-avatar">
-          <div class="autor-icon-wrap">
-            <i class="fas fa-pen-nib"></i>
-          </div>
-          <div class="autor-social">
-            <a href="https://www.instagram.com/tzadkel/" target="_blank" class="social-btn instagram">
-              <i class="fab fa-instagram"></i>
-              <span>@tzadkel</span>
-            </a>
-          </div>
-        </div>
-        <div class="autor-bio">
-          <h2>Nélio Correia da Silva Filho</h2>
-          <div class="autor-divider"></div>
-          <p>Autor de <em>A Mão Esquerda do Cosmos: Herdeiros da Luz</em>, obra que mergulha nas profundezas da fantasia épica com uma narrativa densa e envolvente. Com 706 páginas e 175 capítulos de pura aventura cósmica, esta é uma obra que desafia o leitor a questionar os limites entre luz, sombra, liberdade e destino.</p>
-          <p>Uma voz única na literatura fantástica brasileira, que constrói universos complexos onde a humanidade dos personagens brilha mesmo nas mais profundas trevas.</p>
-          <div class="autor-links">
-            <a href="https://www.instagram.com/tzadkel/" target="_blank" class="autor-link-btn">
-              <i class="fab fa-instagram"></i> Seguir no Instagram
-            </a>
-            <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank" class="autor-link-btn outline">
-              <i class="fas fa-book"></i> Ver Obra na Simplíssimo
-            </a>
-          </div>
-        </div>
+    <div class="audiobook-notice">
+      <i class="fas fa-info-circle"></i>
+      <p>Audiobook completo com 175 capítulos para degustação gratuita. Os arquivos de áudio devem estar na pasta <strong>audio/</strong> com o formato <code>cap001.mp3</code>, <code>cap002.mp3</code>, etc. <a href="https://www.genspark.ai/aidrive/shared/52c86d04-8852-43a6-8403-1565836bd11b" target="_blank">Baixe os áudios aqui</a> e coloque na pasta audio/.</p>
+    </div>
+
+    <div class="chapters-header">
+      <h3><i class="fas fa-list"></i> Lista de Capítulos (175)</h3>
+      <div class="chapters-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Buscar capítulo..." oninput="filterChapters()">
       </div>
     </div>
-  </section>
+    <div class="chapters-list" id="chaptersList"></div>
+  </div>
+</section>
 
-  <!-- ═══ AUDIOBOOK ═══ -->
-  <section id="audiobook">
-    <div class="container">
-      <div class="sec-header">
-        <div class="sec-line"></div>
-        <h2 class="sec-title"><i class="fas fa-headphones-alt"></i> Audiobook Completo</h2>
-        <div class="sec-line"></div>
-        <p class="sec-sub">🎧 Degustação 100% gratuita — Todos os capítulos disponíveis</p>
+<!-- COMPRAR -->
+<section class="comprar" id="comprar">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-ornament">✦ ✦ ✦</div>
+      <h2 class="section-title">Onde Comprar</h2>
+      <p class="section-subtitle">Escolha o formato que preferir</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="formatos-grid">
+      <div class="formato-card destaque">
+        <div class="formato-badge">Mais Vendido</div>
+        <div class="formato-icon"><i class="fas fa-book"></i></div>
+        <h3 class="formato-titulo">Livro Impresso</h3>
+        <p class="formato-desc">Edição física premium com capa elaborada. Sinta o peso de cada página nessa saga épica.</p>
+        <div class="formato-preco"><span class="preco-label">A partir de</span><span class="preco-valor">R$ 69,90</span></div>
+        <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank" class="formato-btn btn-comprar">
+          <i class="fas fa-shopping-bag"></i> Comprar na Simplíssimo <i class="fas fa-external-link-alt"></i>
+        </a>
       </div>
-
-      <div class="player-shell reveal">
-        <!-- NOW PLAYING -->
-        <div class="now-playing">
-          <div class="np-cover">
-            <img src="assets/capa.jpg" alt="Capa" id="npCover" />
-            <div class="np-spin" id="npSpin">
-              <div class="np-center"></div>
-            </div>
-          </div>
-          <div class="np-info">
-            <div class="np-badge" id="npBadge">
-              <i class="fas fa-circle" style="font-size:0.5rem; color:#4fc3f7"></i>&nbsp; Pronto para ouvir
-            </div>
-            <h3 id="npTitle">Capítulo 1: O Gelo nas Veias</h3>
-            <p id="npSub">Capítulo 1 de 175 · Parte I — Ecos do Silêncio</p>
-            <audio id="mainAudio" controls preload="metadata" style="width:100%;margin:12px 0;accent-color:#c9a84c">
-              <source id="audioSrc" src="" type="audio/mpeg" />
-            </audio>
-            <div class="np-controls">
-              <button class="np-btn" onclick="prevChap()">
-                <i class="fas fa-step-backward"></i> Anterior
-              </button>
-              <button class="np-btn active" onclick="nextChap()">
-                Próximo <i class="fas fa-step-forward"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEARCH -->
-        <div class="chap-search">
-          <i class="fas fa-search"></i>
-          <input type="text" id="searchInput" placeholder="Buscar capítulo pelo número ou nome..." oninput="filterChaps()" />
-          <span id="searchCount" class="search-count">175 capítulos</span>
-        </div>
-
-        <!-- LIST -->
-        <div class="chap-scroll">
-          <div id="chapList" class="chap-list"></div>
-        </div>
-
-        <div class="player-notice">
-          <i class="fas fa-info-circle"></i>
-          <span>O audiobook completo é oferecido gratuitamente. Para ter a obra em mãos, adquira abaixo o livro físico ou o e-book PDF.</span>
-        </div>
+      <div class="formato-card">
+        <div class="formato-icon"><i class="fas fa-file-pdf"></i></div>
+        <h3 class="formato-titulo">Ebook PDF</h3>
+        <p class="formato-desc">Leitura digital completa. Acesse imediatamente após a compra em qualquer dispositivo.</p>
+        <div class="formato-preco"><span class="preco-label">A partir de</span><span class="preco-valor">R$ 29,90</span></div>
+        <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-ebook-pdf/" target="_blank" class="formato-btn btn-comprar">
+          <i class="fas fa-download"></i> Comprar PDF <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+      <div class="formato-card audiobook-card">
+        <div class="formato-badge free">Grátis</div>
+        <div class="formato-icon"><i class="fas fa-headphones-alt"></i></div>
+        <h3 class="formato-titulo">Audiobook</h3>
+        <p class="formato-desc">Degustação completa e gratuita. Ouça todos os 175 capítulos narrados em português.</p>
+        <div class="formato-preco"><span class="preco-valor free-price">GRATUITO</span><span class="preco-label">Degustação completa</span></div>
+        <a href="#audiobook" class="formato-btn btn-audio"><i class="fas fa-play"></i> Ouvir Agora</a>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ COMPRAR ═══ -->
-  <section id="comprar">
-    <div class="container">
-      <div class="sec-header">
-        <div class="sec-line"></div>
-        <h2 class="sec-title">Adquirir o Livro</h2>
-        <div class="sec-line"></div>
-        <p class="sec-sub">Escolha o formato ideal para você</p>
+    <div class="lojas-section">
+      <h3 class="lojas-titulo"><span class="ornament-line"></span> Também disponível em <span class="ornament-line"></span></h3>
+      <div class="lojas-grid">
+        <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank" class="loja-card">
+          <div class="loja-logo-wrap"><i class="fas fa-book loja-icon"></i></div>
+          <div class="loja-info"><strong>Simplíssimo</strong><span>Livro Impresso & PDF</span><span class="loja-preco">Impresso + PDF disponíveis</span></div>
+          <div class="loja-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
+        <a href="https://loja.uiclap.com/titulo/ua134261" target="_blank" class="loja-card">
+          <div class="loja-logo-wrap"><i class="fas fa-store loja-icon"></i></div>
+          <div class="loja-info"><strong>Uiclap</strong><span>Loja de Livros Brasileiros</span><span class="loja-preco">Impresso sob demanda</span></div>
+          <div class="loja-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
+        <a href="https://www.amazon.com.br/s?k=9786558908272&i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&linkCode=ur2&tag=revebook-20" target="_blank" class="loja-card">
+          <div class="loja-logo-wrap"><i class="fab fa-amazon loja-icon amazon-color"></i></div>
+          <div class="loja-info"><strong>Amazon Brasil</strong><span>Maior marketplace do Brasil</span><span class="loja-preco">ISBN: 9786558908272</span></div>
+          <div class="loja-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
+        <a href="https://www.estantevirtual.com.br/busca?nsCat=Natural&q=9786558908272&searchField=isbn" target="_blank" class="loja-card">
+          <div class="loja-logo-wrap"><i class="fas fa-bookmark loja-icon"></i></div>
+          <div class="loja-info"><strong>Estante Virtual</strong><span>Sebo & livraria online</span><span class="loja-preco">ISBN: 9786558908272</span></div>
+          <div class="loja-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="buy-grid">
-
-        <!-- FÍSICO -->
-        <div class="buy-card featured reveal">
-          <div class="buy-top-badge">⭐ Mais Popular</div>
-          <div class="buy-header">
-            <div class="buy-cover-wrap">
-              <img src="assets/capa.jpg" alt="Livro Físico" class="buy-cover-img" />
-              <div class="buy-cover-badge"><i class="fas fa-book"></i></div>
-            </div>
-            <div>
-              <h3>Livro Físico</h3>
-              <p class="buy-sub">Impresso · Capa perfeita · 706 páginas</p>
-            </div>
-          </div>
-          <p class="buy-desc">A experiência completa nas suas mãos. Papel de qualidade, capa impecável — para colecionar e presentear.</p>
-          <div class="buy-stores">
-            <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank" class="store-btn simplissimo">
-              <i class="fas fa-shopping-bag"></i>
-              <div class="store-info">
-                <span class="store-name">Simplíssimo</span>
-                <span class="store-action">Comprar agora <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </a>
-            <a href="https://loja.uiclap.com/titulo/ua134261" target="_blank" class="store-btn uiclap">
-              <i class="fas fa-store"></i>
-              <div class="store-info">
-                <span class="store-name">Uiclap</span>
-                <span class="store-action">Ver na Uiclap <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </a>
-            <a href="https://www.amazon.com.br/s?k=9786558908272&i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&linkCode=ur2&tag=revebook-20" target="_blank" class="store-btn amazon">
-              <i class="fab fa-amazon"></i>
-              <div class="store-info">
-                <span class="store-name">Amazon Brasil</span>
-                <span class="store-action">Ver na Amazon <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </a>
-            <a href="https://www.estantevirtual.com.br/busca?nsCat=Natural&q=9786558908272&searchField=isbn" target="_blank" class="store-btn estante">
-              <i class="fas fa-book-open"></i>
-              <div class="store-info">
-                <span class="store-name">Estante Virtual</span>
-                <span class="store-action">Buscar <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </a>
-          </div>
+<!-- AUTOR -->
+<section class="autor" id="autor">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-ornament">✦ ✦ ✦</div>
+      <h2 class="section-title">O Autor</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="autor-grid">
+      <div class="autor-photo-wrap">
+        <div class="autor-photo-frame">
+          <div class="autor-photo-placeholder"><i class="fas fa-user-circle"></i></div>
+          <div class="autor-photo-ornament"></div>
         </div>
-
-        <!-- PDF -->
-        <div class="buy-card reveal delay-1">
-          <div class="buy-header">
-            <div class="buy-cover-wrap">
-              <img src="assets/capa.jpg" alt="E-book PDF" class="buy-cover-img" />
-              <div class="buy-cover-badge pdf-badge"><i class="fas fa-file-pdf"></i></div>
-            </div>
-            <div>
-              <h3>E-book PDF</h3>
-              <p class="buy-sub">Digital · Download imediato</p>
-            </div>
-          </div>
-          <p class="buy-desc">Leia em qualquer dispositivo — tablet, smartphone, computador ou e-reader. Alta qualidade, fidelidade total ao texto.</p>
-          <div class="pdf-features">
-            <div class="pdf-feat"><i class="fas fa-check-circle"></i> Download imediato após compra</div>
-            <div class="pdf-feat"><i class="fas fa-check-circle"></i> Compatível com todos os dispositivos</div>
-            <div class="pdf-feat"><i class="fas fa-check-circle"></i> 706 páginas em alta qualidade</div>
-          </div>
-          <div class="buy-stores" style="margin-top:20px">
-            <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-ebook-pdf/" target="_blank" class="store-btn simplissimo">
-              <i class="fas fa-file-pdf"></i>
-              <div class="store-info">
-                <span class="store-name">Simplíssimo — PDF</span>
-                <span class="store-action">Baixar agora <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- AUDIOBOOK -->
-        <div class="buy-card audio-card reveal delay-2">
-          <div class="buy-header">
-            <div class="buy-cover-wrap audio-cover-wrap">
-              <img src="assets/capa.jpg" alt="Audiobook" class="buy-cover-img" />
-              <div class="buy-cover-badge audio-badge"><i class="fas fa-headphones"></i></div>
-            </div>
-            <div>
-              <h3>Audiobook</h3>
-              <p class="buy-sub">🎧 175 capítulos completos</p>
-            </div>
-          </div>
-          <div class="free-pill"><i class="fas fa-gift"></i> 100% GRATUITO</div>
-          <p class="buy-desc">Ouça todos os 175 capítulos diretamente neste site, sem custo algum. Streaming direto, sem cadastro necessário.</p>
-          <div class="pdf-features">
-            <div class="pdf-feat audio-feat"><i class="fas fa-check-circle"></i> 175 capítulos completos</div>
-            <div class="pdf-feat audio-feat"><i class="fas fa-check-circle"></i> Sem cadastro</div>
-            <div class="pdf-feat audio-feat"><i class="fas fa-check-circle"></i> Streaming direto</div>
-          </div>
-          <a href="#audiobook" class="listen-btn">
-            <i class="fas fa-play-circle"></i> Ouvir Agora — Grátis
-          </a>
-        </div>
-
-      </div>
-
-      <!-- BANNER SIMPLISSIMO -->
-      <div class="simplissimo-row reveal">
-        <div class="simp-left">
-          <i class="fas fa-shopping-bag simp-icon"></i>
-          <div>
-            <strong>Disponível em simplissimo.com.br</strong>
-            <span>Compra segura · Entrega rápida · Suporte ao autor brasileiro</span>
-          </div>
-        </div>
-        <div class="simp-right">
-          <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank">
-            <i class="fas fa-book"></i> Impresso
-          </a>
-          <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-ebook-pdf/" target="_blank">
-            <i class="fas fa-file-pdf"></i> PDF Digital
+        <div class="autor-social">
+          <a href="https://www.instagram.com/tzadkel/" target="_blank" class="social-link instagram">
+            <i class="fab fa-instagram"></i> <span>@tzadkel</span>
           </a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="assets/capa.jpg" alt="Capa" class="footer-cover" />
-          <div>
-            <h3>A Mão Esquerda do Cosmos</h3>
-            <p>Herdeiros da Luz</p>
-            <p class="footer-autor">Nélio Correia da Silva Filho</p>
-            <p class="footer-isbn">ISBN: 9786558908272</p>
-          </div>
+      <div class="autor-bio">
+        <h3 class="autor-nome">Nélio Correia da Silva Filho</h3>
+        <div class="autor-titulo">Escritor • Visionário • Criador de Mundos</div>
+        <div class="autor-divider"></div>
+        <p>Nélio Correia da Silva Filho é um escritor brasileiro apaixonado pela construção de universos ficcionais complexos e envolventes. Em sua obra de estreia, <em>A Mão Esquerda do Cosmos – Herdeiros da Luz</em>, ele nos conduz por um cosmos fragmentado onde o destino de toda a existência repousa nas mãos de jovens heróis.</p>
+        <p>Com uma narrativa que mescla elementos de fantasia épica, ficção científica e mitologia, Nélio cria personagens com profundidade emocional singular e constrói um universo rico em detalhes e significados.</p>
+        <p>Sua escrita é marcada por reviravoltas inesperadas, diálogos filosóficos e uma visão única sobre a dualidade entre luz e sombra, ordem e caos, herança e livre-arbítrio.</p>
+        <div class="autor-stats">
+          <div class="autor-stat"><span class="astat-number">706</span><span class="astat-label">Páginas</span></div>
+          <div class="autor-stat"><span class="astat-number">175</span><span class="astat-label">Capítulos</span></div>
+          <div class="autor-stat"><span class="astat-number">1ª</span><span class="astat-label">Publicação</span></div>
         </div>
-        <div class="footer-col">
-          <h4>Comprar</h4>
-          <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank"><i class="fas fa-book"></i> Impresso — Simplíssimo</a>
-          <a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-ebook-pdf/" target="_blank"><i class="fas fa-file-pdf"></i> PDF — Simplíssimo</a>
-          <a href="https://loja.uiclap.com/titulo/ua134261" target="_blank"><i class="fas fa-store"></i> Uiclap</a>
-          <a href="https://www.amazon.com.br/s?k=9786558908272&i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&linkCode=ur2&tag=revebook-20" target="_blank"><i class="fab fa-amazon"></i> Amazon Brasil</a>
-          <a href="https://www.estantevirtual.com.br/busca?nsCat=Natural&q=9786558908272&searchField=isbn" target="_blank"><i class="fas fa-book-open"></i> Estante Virtual</a>
-        </div>
-        <div class="footer-col">
-          <h4>Navegar</h4>
-          <a href="#sobre"><i class="fas fa-book-reader"></i> Sobre o Livro</a>
-          <a href="#autor"><i class="fas fa-pen-fancy"></i> O Autor</a>
-          <a href="#audiobook"><i class="fas fa-headphones"></i> Audiobook Grátis</a>
-          <a href="#comprar"><i class="fas fa-shopping-cart"></i> Adquirir</a>
-        </div>
-        <div class="footer-col">
-          <h4>Redes Sociais</h4>
-          <a href="https://www.instagram.com/tzadkel/" target="_blank" class="social-link instagram-link">
-            <i class="fab fa-instagram"></i> @tzadkel
-          </a>
-          <div class="footer-insta-preview">
-            <i class="fab fa-instagram" style="font-size:2rem;color:#e1306c;margin-bottom:8px"></i>
-            <span>Siga o autor no Instagram</span>
-            <a href="https://www.instagram.com/tzadkel/" target="_blank" class="insta-follow-btn">
-              Seguir @tzadkel
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2024 Nélio Correia da Silva Filho — Todos os direitos reservados</p>
-        <p>ISBN 9786558908272 · 706 páginas · 175 capítulos</p>
+        <a href="https://www.instagram.com/tzadkel/" target="_blank" class="btn-instagram">
+          <i class="fab fa-instagram"></i> Seguir no Instagram
+        </a>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="app.js"></script>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><span class="brand-icon">✦</span><span>A Mão Esquerda do Cosmos</span></div>
+        <p class="footer-desc">Uma saga épica de fantasia que une mundos, heranças e o poder ancestral do cosmos.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/tzadkel/" target="_blank" title="Instagram do Autor"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Formatos</h4>
+        <ul>
+          <li><a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank">Livro Impresso</a></li>
+          <li><a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-ebook-pdf/" target="_blank">Ebook PDF</a></li>
+          <li><a href="#audiobook">Audiobook (Grátis)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Lojas</h4>
+        <ul>
+          <li><a href="https://simplissimo.com.br/produto/a-mao-esquerda-do-cosmos-impresso/" target="_blank">Simplíssimo</a></li>
+          <li><a href="https://loja.uiclap.com/titulo/ua134261" target="_blank">Uiclap</a></li>
+          <li><a href="https://www.amazon.com.br/s?k=9786558908272&i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&linkCode=ur2&tag=revebook-20" target="_blank">Amazon Brasil</a></li>
+          <li><a href="https://www.estantevirtual.com.br/busca?nsCat=Natural&q=9786558908272&searchField=isbn" target="_blank">Estante Virtual</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>ISBN</h4>
+        <p class="footer-isbn">978-65-5890-827-2</p>
+        <p class="footer-copyright">© 2024 Nélio Correia da Silva Filho<br>Todos os direitos reservados.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>✦ <em>A Mão Esquerda do Cosmos – Herdeiros da Luz</em> ✦</p>
+      <p>por Nélio Correia da Silva Filho &nbsp;|&nbsp; ISBN 978-65-5890-827-2</p>
+    </div>
+  </div>
+</footer>
+
+<audio id="audioPlayer" preload="none"></audio>
+<script src="app.js"></script>
 </body>
 </html>

@@ -1,591 +1,612 @@
 /* =====================================================
-   A MÃO ESQUERDA DO COSMOS — app.js
-   GitHub Pages Player — lê áudios da pasta /audio/
+   A MÃO ESQUERDA DO COSMOS — HERDEIROS DA LUZ
+   JavaScript — Player Audiobook + UI
    ===================================================== */
 
-// ── CAPÍTULOS (175 + cap 0) ──
+'use strict';
+
+// =====================================================
+// DADOS DOS CAPÍTULOS (175 capítulos)
+// =====================================================
 const CHAPTERS = [
-  { num: 0,   title: "Prólogo",                         part: 0 },
-  { num: 1,   title: "O Gelo nas Veias",                part: 1 },
-  { num: 2,   title: "Sussurros nas Sombras",           part: 1 },
-  { num: 3,   title: "Ecos nas Catacumbas",             part: 1 },
-  { num: 4,   title: "O Jogo do Mestre Instrutor",      part: 1 },
-  { num: 5,   title: "Presságios na Névoa",             part: 1 },
-  { num: 6,   title: "A Noite das Sombras Longas",      part: 1 },
-  { num: 7,   title: "Fagulhas na Forja",               part: 1 },
-  { num: 8,   title: "Dois Estranhos na Escuridão",     part: 1 },
-  { num: 9,   title: "Correntezas e Confiança",         part: 1 },
-  { num: 10,  title: "O Limiar da Liberdade",           part: 1 },
-  { num: 11,  title: "Além dos Muros",                  part: 1 },
-  { num: 12,  title: "O Mundo Proibido",                part: 1 },
-  { num: 13,  title: "Primeiras Estrelas",              part: 1 },
-  { num: 14,  title: "A Voz do Cosmos",                 part: 1 },
-  { num: 15,  title: "Herdeiros Despertos",             part: 1 },
-  { num: 16,  title: "O Mapa das Sombras",              part: 1 },
-  { num: 17,  title: "Raízes da Luz",                   part: 1 },
-  { num: 18,  title: "A Profecia Esquecida",            part: 1 },
-  { num: 19,  title: "Laços de Sangue",                 part: 1 },
-  { num: 20,  title: "O Primeiro Sinal",                part: 1 },
-  { num: 21,  title: "Caminhos Divergentes",            part: 1 },
-  { num: 22,  title: "A Torre do Silêncio",             part: 1 },
-  { num: 23,  title: "Segredos da Ordem",               part: 1 },
-  { num: 24,  title: "O Arquivo Proibido",              part: 1 },
-  { num: 25,  title: "Chamas na Noite",                 part: 1 },
-  { num: 26,  title: "O Encontro dos Destinados",       part: 1 },
-  { num: 27,  title: "Vozes do Passado",                part: 1 },
-  { num: 28,  title: "A Marca Cósmica",                 part: 1 },
-  { num: 29,  title: "Ecos da Criação",                 part: 1 },
-  { num: 30,  title: "A Quinta Dimensão",               part: 1 },
-  { num: 31,  title: "Fragmentos de Memória",           part: 1 },
-  { num: 32,  title: "O Portal das Almas",              part: 1 },
-  { num: 33,  title: "Sentinelas da Ordem",             part: 1 },
-  { num: 34,  title: "A Herança Proibida",              part: 1 },
-  { num: 35,  title: "Luz entre Trevas",                part: 1 },
-  { num: 36,  title: "O Despertar de Elara",            part: 1 },
-  { num: 37,  title: "Segredos de Rhys",                part: 1 },
-  { num: 38,  title: "A Conspiração das Sombras",       part: 1 },
-  { num: 39,  title: "O Pacto Antigo",                  part: 1 },
-  { num: 40,  title: "Guardiões da Luz",                part: 1 },
-  { num: 41,  title: "A Travessia",                     part: 1 },
-  { num: 42,  title: "Memórias de Outro Mundo",         part: 1 },
-  { num: 43,  title: "O Véu Rasgado",                   part: 1 },
-  { num: 44,  title: "Filhos do Cosmos",                part: 1 },
-  { num: 45,  title: "A Ordem Restaurada",              part: 1 },
-  { num: 46,  title: "Sombras que Falam",               part: 1 },
-  { num: 47,  title: "O Último Acólito",                part: 1 },
-  { num: 48,  title: "Coragem nas Trevas",              part: 1 },
-  { num: 49,  title: "O Eco da Profecia",               part: 1 },
-  { num: 50,  title: "Meio Caminho",                    part: 1 },
-  { num: 51,  title: "A Luz do Amanhecer",              part: 2 },
-  { num: 52,  title: "O Cosmos se Abre",                part: 2 },
-  { num: 53,  title: "Herdeiros Reunidos",              part: 2 },
-  { num: 54,  title: "A Ordem dos Antigos",             part: 2 },
-  { num: 55,  title: "Batalha nas Estrelas",            part: 2 },
-  { num: 56,  title: "O Preço da Liberdade",            part: 2 },
-  { num: 57,  title: "Laços Eternos",                   part: 2 },
-  { num: 58,  title: "A Última Fortaleza",              part: 2 },
-  { num: 59,  title: "Chamas do Cosmos",                part: 2 },
-  { num: 60,  title: "O Sacrifício de Liam",            part: 2 },
-  { num: 61,  title: "Além do Horizonte",               part: 2 },
-  { num: 62,  title: "A Verdade de Vorlag",             part: 2 },
-  { num: 63,  title: "Destinos Entrelaçados",           part: 2 },
-  { num: 64,  title: "O Cosmos Responde",               part: 2 },
-  { num: 65,  title: "A Mão Esquerda Revelada",         part: 2 },
-  { num: 66,  title: "Guardiões Despertos",             part: 2 },
-  { num: 67,  title: "A Grande Convergência",           part: 2 },
-  { num: 68,  title: "Filhos da Luz",                   part: 2 },
-  { num: 69,  title: "O Dom Ancestral",                 part: 2 },
-  { num: 70,  title: "Sombras Vencidas",                part: 2 },
-  { num: 71,  title: "A Nova Ordem",                    part: 2 },
-  { num: 72,  title: "Mundos Paralelos",                part: 2 },
-  { num: 73,  title: "O Elo Cósmico",                   part: 2 },
-  { num: 74,  title: "Almas Irmãs",                     part: 2 },
-  { num: 75,  title: "A Batalha Final Aproxima",        part: 2 },
-  { num: 76,  title: "Forças Ocultas",                  part: 2 },
-  { num: 77,  title: "O Retorno dos Antigos",           part: 2 },
-  { num: 78,  title: "Luz Plena",                       part: 2 },
-  { num: 79,  title: "O Último Véu",                    part: 2 },
-  { num: 80,  title: "Além da Escuridão",               part: 2 },
-  { num: 81,  title: "A Chave do Cosmos",               part: 2 },
-  { num: 82,  title: "Heróis Forjados",                 part: 2 },
-  { num: 83,  title: "A Tapeçaria do Destino",          part: 2 },
-  { num: 84,  title: "Vozes do Cosmos",                 part: 2 },
-  { num: 85,  title: "O Santuário da Luz",              part: 2 },
-  { num: 86,  title: "Aliados Improváveis",             part: 2 },
-  { num: 87,  title: "O Dom da Visão",                  part: 2 },
-  { num: 88,  title: "Cosmos em Chamas",                part: 2 },
-  { num: 89,  title: "A Última Esperança",              part: 2 },
-  { num: 90,  title: "Renascidos da Luz",               part: 2 },
-  { num: 91,  title: "O Segredo de Malakor",            part: 2 },
-  { num: 92,  title: "A Teia de Sombras",               part: 2 },
-  { num: 93,  title: "Raios de Esperança",              part: 2 },
-  { num: 94,  title: "O Despertar Cósmico",             part: 2 },
-  { num: 95,  title: "Laços de Luz",                    part: 2 },
-  { num: 96,  title: "A Fonte Primordial",              part: 2 },
-  { num: 97,  title: "Guerreiros da Luz",               part: 2 },
-  { num: 98,  title: "O Preço do Conhecimento",         part: 2 },
-  { num: 99,  title: "Nas Bordas do Cosmos",            part: 2 },
-  { num: 100, title: "Um Século de Capítulos",          part: 2 },
-  { num: 101, title: "Ecos do Amanhã",                  part: 2 },
-  { num: 102, title: "A Ordem Cósmica",                 part: 2 },
-  { num: 103, title: "Filhos da Sombra e da Luz",       part: 2 },
-  { num: 104, title: "O Grande Despertar",              part: 2 },
-  { num: 105, title: "Mundos em Colapso",               part: 2 },
-  { num: 106, title: "A Dança das Estrelas",            part: 2 },
-  { num: 107, title: "Forças Primordiais",              part: 2 },
-  { num: 108, title: "O Caminho da Luz",                part: 2 },
-  { num: 109, title: "Sombras do Passado",              part: 2 },
-  { num: 110, title: "A Última Batalha Começa",         part: 2 },
-  { num: 111, title: "Herdeiros em Guerra",             part: 2 },
-  { num: 112, title: "O Cosmos Sangra",                 part: 2 },
-  { num: 113, title: "Luz contra Trevas",               part: 2 },
-  { num: 114, title: "O Sacrifício Supremo",            part: 2 },
-  { num: 115, title: "Almas Livres",                    part: 2 },
-  { num: 116, title: "A Vitória da Luz",                part: 2 },
-  { num: 117, title: "Cosmos Restaurado",               part: 2 },
-  { num: 118, title: "O Novo Amanhecer",                part: 2 },
-  { num: 119, title: "Herdeiros da Luz Plena",          part: 2 },
-  { num: 120, title: "O Legado Eterno",                 part: 2 },
-  { num: 121, title: "A Última Fronteira",              part: 2 },
-  { num: 122, title: "Guardiões do Cosmos",             part: 2 },
-  { num: 123, title: "O Dom da Liberdade",              part: 2 },
-  { num: 124, title: "Almas Reunidas",                  part: 2 },
-  { num: 125, title: "A Grande Travessia",              part: 2 },
-  { num: 126, title: "O Cosmos Abraça",                 part: 2 },
-  { num: 127, title: "Herdeiros Completos",             part: 2 },
-  { num: 128, title: "A Paz das Estrelas",              part: 2 },
-  { num: 129, title: "Luz Eterna",                      part: 2 },
-  { num: 130, title: "O Fim do Começo",                 part: 2 },
-  { num: 131, title: "Novos Horizontes",                part: 2 },
-  { num: 132, title: "A Jornada Continua",              part: 2 },
-  { num: 133, title: "Cosmos Infinito",                 part: 2 },
-  { num: 134, title: "O Elo Imortal",                   part: 2 },
-  { num: 135, title: "Filhos das Estrelas",             part: 2 },
-  { num: 136, title: "A Herança da Luz",                part: 2 },
-  { num: 137, title: "Mundos Unidos",                   part: 2 },
-  { num: 138, title: "O Cosmos Canta",                  part: 2 },
-  { num: 139, title: "Herdeiros Imortais",              part: 2 },
-  { num: 140, title: "A Última Sombra",                 part: 2 },
-  { num: 141, title: "Luz Triunfante",                  part: 2 },
-  { num: 142, title: "O Cosmos em Paz",                 part: 2 },
-  { num: 143, title: "Guardiões Eternos",               part: 2 },
-  { num: 144, title: "A Dança da Criação",              part: 2 },
-  { num: 145, title: "Filhos do Infinito",              part: 2 },
-  { num: 146, title: "O Legado dos Antigos",            part: 2 },
-  { num: 147, title: "Almas do Cosmos",                 part: 2 },
-  { num: 148, title: "A Última Palavra",                part: 2 },
-  { num: 149, title: "Ecos da Eternidade",              part: 2 },
-  { num: 150, title: "Meados da Jornada Final",         part: 2 },
-  { num: 151, title: "O Cosmos Respira",                part: 2 },
-  { num: 152, title: "Herdeiros da Criação",            part: 2 },
-  { num: 153, title: "A Luz que Nunca Apaga",           part: 2 },
-  { num: 154, title: "O Elo Primordial",                part: 2 },
-  { num: 155, title: "Filhos da Eternidade",            part: 2 },
-  { num: 156, title: "O Cosmos Revestido",              part: 2 },
-  { num: 157, title: "A Grande Revelação",              part: 2 },
-  { num: 158, title: "Herdeiros Absolutos",             part: 2 },
-  { num: 159, title: "A Fonte da Luz",                  part: 2 },
-  { num: 160, title: "O Cosmos Perfeito",               part: 2 },
-  { num: 161, title: "Almas Eternas",                   part: 2 },
-  { num: 162, title: "O Dom Final",                     part: 2 },
-  { num: 163, title: "Guardiões da Criação",            part: 2 },
-  { num: 164, title: "A Última Chama",                  part: 2 },
-  { num: 165, title: "Cosmos Unificado",                part: 2 },
-  { num: 166, title: "O Elo dos Herdeiros",             part: 2 },
-  { num: 167, title: "Luz sem Fim",                     part: 2 },
-  { num: 168, title: "A Jornada Completa",              part: 2 },
-  { num: 169, title: "Filhos da Luz Eterna",            part: 2 },
-  { num: 170, title: "O Cosmos Transcende",             part: 2 },
-  { num: 171, title: "Herdeiros da Criação Divina",     part: 2 },
-  { num: 172, title: "A Paz Cósmica",                   part: 2 },
-  { num: 173, title: "O Legado Imortal",                part: 2 },
-  { num: 174, title: "Guardiões do Infinito",           part: 2 },
-  { num: 175, title: "O Cosmos — Fim e Começo",         part: 2 },
+  { num: 0,   title: "Prólogo — O Início de Tudo" },
+  { num: 1,   title: "O Despertar" },
+  { num: 2,   title: "Vozes no Vazio" },
+  { num: 3,   title: "A Marca da Herança" },
+  { num: 4,   title: "Sombras do Passado" },
+  { num: 5,   title: "O Primeiro Passo" },
+  { num: 6,   title: "Além das Fronteiras" },
+  { num: 7,   title: "A Torre dos Ecos" },
+  { num: 8,   title: "Revelações Antigas" },
+  { num: 9,   title: "O Caminho das Estrelas" },
+  { num: 10,  title: "Filhos da Luz" },
+  { num: 11,  title: "O Santuário Proibido" },
+  { num: 12,  title: "Laços de Sangue" },
+  { num: 13,  title: "A Noite das Chamas" },
+  { num: 14,  title: "Segredos da Ordem" },
+  { num: 15,  title: "O Guardião das Sombras" },
+  { num: 16,  title: "Entre Dois Mundos" },
+  { num: 17,  title: "A Profecia Esquecida" },
+  { num: 18,  title: "Ruínas Celestiais" },
+  { num: 19,  title: "O Peso da Escolha" },
+  { num: 20,  title: "Aliados Improváveis" },
+  { num: 21,  title: "A Voz das Pedras" },
+  { num: 22,  title: "Ecos do Silêncio" },
+  { num: 23,  title: "A Batalha Interior" },
+  { num: 24,  title: "Fragmentos de Memória" },
+  { num: 25,  title: "O Elo Perdido" },
+  { num: 26,  title: "Nas Profundezas do Cosmos" },
+  { num: 27,  title: "A Terceira Lua" },
+  { num: 28,  title: "O Despertar do Dragão" },
+  { num: 29,  title: "Chamas e Cinzas" },
+  { num: 30,  title: "A Ordem dos Herdeiros" },
+  { num: 31,  title: "Caminhos Divergentes" },
+  { num: 32,  title: "A Última Esperança" },
+  { num: 33,  title: "O Véu das Sombras" },
+  { num: 34,  title: "Segredos da Criação" },
+  { num: 35,  title: "A Chave do Destino" },
+  { num: 36,  title: "Mundos Paralelos" },
+  { num: 37,  title: "O Preço da Glória" },
+  { num: 38,  title: "Labirinto de Luz" },
+  { num: 39,  title: "A Promessa Sagrada" },
+  { num: 40,  title: "Entre o Ser e o Nada" },
+  { num: 41,  title: "O Chamado Ancestral" },
+  { num: 42,  title: "Forças Ocultas" },
+  { num: 43,  title: "A Porta dos Sonhos" },
+  { num: 44,  title: "Guerreiros da Aurora" },
+  { num: 45,  title: "O Cristal Sagrado" },
+  { num: 46,  title: "Nas Margens do Impossível" },
+  { num: 47,  title: "A Dança das Constelações" },
+  { num: 48,  title: "Espelhos da Alma" },
+  { num: 49,  title: "O Despertar da Fênix" },
+  { num: 50,  title: "Metade da Jornada" },
+  { num: 51,  title: "A Ilha dos Esquecidos" },
+  { num: 52,  title: "Raízes do Caos" },
+  { num: 53,  title: "O Oráculo Silencioso" },
+  { num: 54,  title: "Correntes do Tempo" },
+  { num: 55,  title: "A Herança Proibida" },
+  { num: 56,  title: "Nas Sombras da Eternidade" },
+  { num: 57,  title: "O Guardião do Limiar" },
+  { num: 58,  title: "A Última Sentinela" },
+  { num: 59,  title: "Chamas Imortais" },
+  { num: 60,  title: "O Pacto das Estrelas" },
+  { num: 61,  title: "Renascimento" },
+  { num: 62,  title: "A Teia do Destino" },
+  { num: 63,  title: "Guerras Invisíveis" },
+  { num: 64,  title: "O Espírito da Terra" },
+  { num: 65,  title: "Além do Horizonte" },
+  { num: 66,  title: "A Voz do Cosmos" },
+  { num: 67,  title: "Fragmentos de Luz" },
+  { num: 68,  title: "O Retorno dos Antigos" },
+  { num: 69,  title: "Nas Fronteiras do Real" },
+  { num: 70,  title: "A Sombra da Verdade" },
+  { num: 71,  title: "O Caminho da Redenção" },
+  { num: 72,  title: "Lamentos do Vento" },
+  { num: 73,  title: "A Forja do Herói" },
+  { num: 74,  title: "Segredos Eternos" },
+  { num: 75,  title: "O Laço Inquebrantável" },
+  { num: 76,  title: "Além da Morte" },
+  { num: 77,  title: "A Coroa Celestial" },
+  { num: 78,  title: "Guerreiros do Amanhã" },
+  { num: 79,  title: "O Ponto de Virada" },
+  { num: 80,  title: "Nas Cinzas do Mundo" },
+  { num: 81,  title: "A Luz que Persiste" },
+  { num: 82,  title: "O Preço da Liberdade" },
+  { num: 83,  title: "Almas Gêmeas" },
+  { num: 84,  title: "A Grande Convergência" },
+  { num: 85,  title: "O Fim do Começo" },
+  { num: 86,  title: "Silêncio Antes da Tempestade" },
+  { num: 87,  title: "Fim da Parte I — Ecos do Silêncio" },
+  { num: 88,  title: "PARTE II — Herdeiros da Luz" },
+  { num: 89,  title: "O Novo Amanhecer" },
+  { num: 90,  title: "A Chama Renascida" },
+  { num: 91,  title: "Guerras Celestiais" },
+  { num: 92,  title: "O Legado dos Mestres" },
+  { num: 93,  title: "Nas Profundezas do Abismo" },
+  { num: 94,  title: "A Última Aliança" },
+  { num: 95,  title: "Forças do Destino" },
+  { num: 96,  title: "O Mapa das Estrelas" },
+  { num: 97,  title: "Segredos da Fortaleza" },
+  { num: 98,  title: "A Batalha dos Titãs" },
+  { num: 99,  title: "Renascimento das Sombras" },
+  { num: 100, title: "O Centésimo Passo" },
+  { num: 101, title: "Além dos Limites" },
+  { num: 102, title: "A Voz do Silêncio" },
+  { num: 103, title: "Guerreiros de Luz" },
+  { num: 104, title: "O Segredo Revelado" },
+  { num: 105, title: "Nas Margens do Caos" },
+  { num: 106, title: "A Escolha Final" },
+  { num: 107, title: "O Coração do Cosmos" },
+  { num: 108, title: "Fragmentos de Eternidade" },
+  { num: 109, title: "A Última Batalha" },
+  { num: 110, title: "Entre Mundos" },
+  { num: 111, title: "O Sacrifício Supremo" },
+  { num: 112, title: "Laços de Destino" },
+  { num: 113, title: "A Porta da Eternidade" },
+  { num: 114, title: "Guerreiros Imortais" },
+  { num: 115, title: "O Rugido do Cosmos" },
+  { num: 116, title: "Nas Sombras da Glória" },
+  { num: 117, title: "A Luz do Fim" },
+  { num: 118, title: "O Grande Despertar" },
+  { num: 119, title: "Filhos da Eternidade" },
+  { num: 120, title: "A Coroa de Luz" },
+  { num: 121, title: "O Caminho dos Heróis" },
+  { num: 122, title: "Além do Possível" },
+  { num: 123, title: "A Última Chama" },
+  { num: 124, title: "Nas Fronteiras da Eternidade" },
+  { num: 125, title: "O Segredo do Cosmos" },
+  { num: 126, title: "Guerras do Espírito" },
+  { num: 127, title: "A Herança da Luz" },
+  { num: 128, title: "Renascimento Eterno" },
+  { num: 129, title: "O Guardião Final" },
+  { num: 130, title: "Nas Profundezas da Luz" },
+  { num: 131, title: "A Grande Revelação" },
+  { num: 132, title: "O Mapa do Destino" },
+  { num: 133, title: "Além das Sombras" },
+  { num: 134, title: "A Batalha Suprema" },
+  { num: 135, title: "Guerreiros da Eternidade" },
+  { num: 136, title: "O Laço do Cosmos" },
+  { num: 137, title: "Nas Margens do Infinito" },
+  { num: 138, title: "A Voz dos Herdeiros" },
+  { num: 139, title: "O Fim das Guerras" },
+  { num: 140, title: "Luz e Sombra" },
+  { num: 141, title: "A Última Escolha" },
+  { num: 142, title: "Filhos do Cosmos" },
+  { num: 143, title: "O Grande Caminho" },
+  { num: 144, title: "Nas Ruínas do Passado" },
+  { num: 145, title: "A Chave da Eternidade" },
+  { num: 146, title: "Guerreiros da Luz" },
+  { num: 147, title: "O Despertar Final" },
+  { num: 148, title: "Além da Eternidade" },
+  { num: 149, title: "A Última Profecia" },
+  { num: 150, title: "Metade Final" },
+  { num: 151, title: "O Caminho da Glória" },
+  { num: 152, title: "Nas Fronteiras do Cosmos" },
+  { num: 153, title: "A Grande Aliança" },
+  { num: 154, title: "Guerras de Luz" },
+  { num: 155, title: "O Sacrifício dos Heróis" },
+  { num: 156, title: "Nas Sombras do Cosmos" },
+  { num: 157, title: "A Última Fronteira" },
+  { num: 158, title: "Filhos da Luz e da Sombra" },
+  { num: 159, title: "O Coração dos Herdeiros" },
+  { num: 160, title: "Nas Profundezas do Destino" },
+  { num: 161, title: "A Grande Jornada" },
+  { num: 162, title: "Guerreiros do Cosmos" },
+  { num: 163, title: "O Segredo Final" },
+  { num: 164, title: "Além dos Sonhos" },
+  { num: 165, title: "A Última Batalha dos Herdeiros" },
+  { num: 166, title: "Nas Margens da Eternidade" },
+  { num: 167, title: "O Rugido Final" },
+  { num: 168, title: "A Voz do Destino" },
+  { num: 169, title: "Filhos do Infinito" },
+  { num: 170, title: "O Grande Final" },
+  { num: 171, title: "Nas Profundezas da Glória" },
+  { num: 172, title: "A Última Luz" },
+  { num: 173, title: "O Fim e o Começo" },
+  { num: 174, title: "Herdeiros da Eternidade" },
+  { num: 175, title: "Epílogo — O Cosmos Continua" }
 ];
 
-const PART_LABELS = {
-  0: "Prólogo",
-  1: "Parte I — Ecos do Silêncio",
-  2: "Parte II — Herdeiros da Luz"
-};
+// =====================================================
+// ESTADO DO PLAYER
+// =====================================================
+let currentChapterIdx = 0;
+let audioEl = null;
+let isPlaying = false;
+let progressInterval = null;
 
-// ── GERA URL DO ÁUDIO para um capítulo ──
-// Os arquivos devem estar em /audio/ com nomes como:
-//   cap000.mp3, cap001.mp3 ... cap175.mp3
-// OU com nomes que o script de upload gerou (ex: capitulo_001.mp3)
-// A função tenta múltiplos padrões de nome.
-function audioUrl(num) {
-  const p = String(num).padStart(3, '0');
-  // Retorna array de candidatos para tentar em ordem
-  return [
-    `audio/cap${p}.mp3`,
-    `audio/capitulo_${p}.mp3`,
-    `audio/cap_${p}.mp3`,
-    `audio/${p}.mp3`,
-    `audio/cap${p}.ogg`,
-    `audio/cap${p}.m4a`,
-    `audio/cap${p}.wav`,
-  ];
-}
-
-// ── ESTADO ──
-let currentIdx = 0;
-let filtered   = [...CHAPTERS];
-let audioReady = {}; // cache de URLs que existem
-
-// ── INIT ──
+// =====================================================
+// INICIALIZAÇÃO
+// =====================================================
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('%c✦ A Mão Esquerda do Cosmos — Herdeiros da Luz', 'color: #c9a84c; font-size: 16px; font-weight: bold;');
+
   initStars();
+  initParticles();
   initNavbar();
-  initAnimations();
-  initCounters();
-  renderList(filtered);
-  selectChap(0); // começa no prólogo/cap0
-  setupAutoNext();
-  setupMobileMenu();
-  checkAllAudio();
+  initChaptersList();
+  initAudioPlayer();
+  initScrollAnimations();
+  loadChapter(0, false);
 });
 
-// ── VERIFICA QUAIS ÁUDIOS EXISTEM ──
-function checkAllAudio() {
-  // Verificação assíncrona leve para marcar capítulos disponíveis
-  CHAPTERS.forEach(ch => {
-    const candidates = audioUrl(ch.num);
-    tryNextCandidate(ch.num, candidates, 0);
-  });
-}
-
-function tryNextCandidate(num, candidates, idx) {
-  if (idx >= candidates.length) return;
-  const url = candidates[idx];
-  fetch(url, { method: 'HEAD' })
-    .then(r => {
-      if (r.ok) {
-        audioReady[num] = url;
-        // Atualizar ícone na lista
-        const el = document.getElementById(`ci-${num}`);
-        if (el) {
-          el.innerHTML = '<i class="fas fa-headphones" style="color:#4fc3f7;font-size:.65rem"></i>';
-        }
-      } else {
-        tryNextCandidate(num, candidates, idx + 1);
-      }
-    })
-    .catch(() => tryNextCandidate(num, candidates, idx + 1));
-}
-
-// ── RENDERIZAR LISTA DE CAPÍTULOS ──
-function renderList(list) {
-  const el = document.getElementById('chapList');
-  if (!el) return;
-
-  let lastPart = -1;
-  let html = '';
-
-  list.forEach((ch, i) => {
-    const globalIdx = CHAPTERS.indexOf(ch);
-    const isActive  = globalIdx === currentIdx;
-    const hasAudio  = !!audioReady[ch.num];
-    const partLabel = PART_LABELS[ch.part];
-
-    if (ch.part !== lastPart) {
-      lastPart = ch.part;
-      html += `<div class="chap-part-header">${partLabel}</div>`;
-    }
-
-    html += `
-      <div class="chap-item ${isActive ? 'active' : ''}"
-           onclick="selectChap(${globalIdx})"
-           id="chap-${globalIdx}">
-        <span class="ci-num">${ch.num}</span>
-        <div class="ci-ico">
-          <i class="fas ${isActive ? 'fa-volume-up' : 'fa-play'}"></i>
-        </div>
-        <span class="ci-title">
-          ${ch.num === 0 ? 'Prólogo' : `Cap. ${ch.num}`}: ${ch.title}
-        </span>
-        <span id="ci-${ch.num}" class="ci-part">
-          ${hasAudio
-            ? '<i class="fas fa-headphones" style="color:#4fc3f7;font-size:.65rem"></i>'
-            : '<i class="fas fa-clock" style="color:rgba(160,144,112,.35);font-size:.65rem"></i>'
-          }
-        </span>
-      </div>`;
-  });
-
-  el.innerHTML = html;
-  document.getElementById('searchCount').textContent =
-    `${list.length} capítulo${list.length !== 1 ? 's' : ''}`;
-}
-
-// ── SELECIONAR CAPÍTULO ──
-function selectChap(idx) {
-  currentIdx = idx;
-  const ch   = CHAPTERS[idx];
-  if (!ch) return;
-
-  // Atualizar UI do player
-  const titleEl = document.getElementById('npTitle');
-  const subEl   = document.getElementById('npSub');
-  const badge   = document.getElementById('npBadge');
-  const spin    = document.getElementById('npSpin');
-
-  if (titleEl) titleEl.textContent = ch.num === 0
-    ? `Prólogo: ${ch.title}`
-    : `Capítulo ${ch.num}: ${ch.title}`;
-
-  if (subEl) subEl.textContent =
-    `${ch.num === 0 ? 'Prólogo' : `Capítulo ${ch.num}`} de 175 · ${PART_LABELS[ch.part]}`;
-
-  // Carregar áudio
-  const audio  = document.getElementById('mainAudio');
-  const srcEl  = document.getElementById('audioSrc');
-  const bestUrl = audioReady[ch.num];
-
-  if (audio && srcEl) {
-    if (bestUrl) {
-      srcEl.src = bestUrl;
-      audio.load();
-      audio.play().catch(() => {});
-      if (badge) badge.innerHTML = '<i class="fas fa-circle" style="font-size:.5rem;color:#4fc3f7"></i>&nbsp; Reproduzindo';
-      if (spin) spin.classList.add('playing');
-    } else {
-      // Tenta candidatos um a um
-      const candidates = audioUrl(ch.num);
-      tryLoadAudio(audio, srcEl, candidates, 0, ch.num, badge, spin);
-    }
-  }
-
-  // Re-renderizar lista
-  renderList(filtered.length < CHAPTERS.length ? filtered : CHAPTERS);
-
-  // Scroll para item ativo
-  setTimeout(() => {
-    const el = document.getElementById(`chap-${idx}`);
-    if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, 80);
-}
-
-function tryLoadAudio(audio, srcEl, candidates, idx, chapNum, badge, spin) {
-  if (idx >= candidates.length) {
-    if (badge) badge.innerHTML = '<i class="fas fa-clock" style="font-size:.5rem;color:#a09070"></i>&nbsp; Áudio em processamento';
-    showToast(`⏳ Áudio do Capítulo ${chapNum} em breve...`);
-    return;
-  }
-  const url = candidates[idx];
-  fetch(url, { method: 'HEAD' })
-    .then(r => {
-      if (r.ok) {
-        audioReady[chapNum] = url;
-        srcEl.src = url;
-        audio.load();
-        audio.play().catch(() => {});
-        if (badge) badge.innerHTML = '<i class="fas fa-circle" style="font-size:.5rem;color:#4fc3f7"></i>&nbsp; Reproduzindo';
-        if (spin) spin.classList.add('playing');
-      } else {
-        tryLoadAudio(audio, srcEl, candidates, idx + 1, chapNum, badge, spin);
-      }
-    })
-    .catch(() => tryLoadAudio(audio, srcEl, candidates, idx + 1, chapNum, badge, spin));
-}
-
-// ── NAVEGAÇÃO ──
-function prevChap() {
-  if (currentIdx > 0) selectChap(currentIdx - 1);
-}
-function nextChap() {
-  if (currentIdx < CHAPTERS.length - 1) selectChap(currentIdx + 1);
-}
-
-// ── AUTO NEXT ──
-function setupAutoNext() {
-  const audio = document.getElementById('mainAudio');
-  const spin  = document.getElementById('npSpin');
-  const badge = document.getElementById('npBadge');
-  if (!audio) return;
-
-  audio.addEventListener('ended', () => {
-    if (spin) spin.classList.remove('playing');
-    if (currentIdx < CHAPTERS.length - 1) setTimeout(() => nextChap(), 1000);
-  });
-  audio.addEventListener('play',  () => { if (spin) spin.classList.add('playing'); });
-  audio.addEventListener('pause', () => { if (spin) spin.classList.remove('playing'); });
-  audio.addEventListener('error', () => {
-    if (spin) spin.classList.remove('playing');
-    if (badge) badge.innerHTML = '<i class="fas fa-exclamation-circle" style="font-size:.5rem;color:#e05555"></i>&nbsp; Áudio não disponível';
-  });
-}
-
-// ── FILTRAR CAPÍTULOS ──
-function filterChaps() {
-  const q = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-  filtered = q
-    ? CHAPTERS.filter(ch =>
-        ch.title.toLowerCase().includes(q) ||
-        String(ch.num).includes(q) ||
-        (ch.num === 0 && 'prólogo'.includes(q))
-      )
-    : [...CHAPTERS];
-  renderList(filtered);
-}
-
-// ── TOAST ──
-function showToast(msg) {
-  let t = document.getElementById('_toast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = '_toast';
-    Object.assign(t.style, {
-      position:'fixed', bottom:'28px', left:'50%', transform:'translateX(-50%)',
-      background:'rgba(13,27,42,.97)', border:'1px solid rgba(79,195,247,.4)',
-      color:'#4fc3f7', padding:'11px 28px', borderRadius:'50px',
-      fontSize:'.85rem', zIndex:'9999', letterSpacing:'1px',
-      boxShadow:'0 8px 30px rgba(0,0,0,.5)', transition:'opacity .3s',
-    });
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.style.opacity = '1';
-  clearTimeout(t._to);
-  t._to = setTimeout(() => { t.style.opacity = '0'; }, 3000);
-}
-
-// ── MOBILE MENU ──
-function toggleMenu() {
-  const m = document.getElementById('navMobile');
-  if (m) m.classList.toggle('open');
-}
-function setupMobileMenu() {
-  document.addEventListener('click', e => {
-    const m = document.getElementById('navMobile');
-    const nb = document.querySelector('#navbar');
-    if (m && nb && !nb.contains(e.target)) m.classList.remove('open');
-  });
-}
-
-// ── NAVBAR SCROLL ──
-function initNavbar() {
-  const nb = document.getElementById('navbar');
-  if (!nb) return;
-  const onScroll = () => nb.classList.toggle('scrolled', window.scrollY > 50);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
-
-// ── COUNTERS ANIMADOS ──
-function initCounters() {
-  const els = document.querySelectorAll('.stat-n[data-count]');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el  = entry.target;
-      const end = parseInt(el.dataset.count, 10);
-      const dur = 1400;
-      const step = Math.ceil(end / (dur / 16));
-      let cur = 0;
-      const tick = () => {
-        cur = Math.min(cur + step, end);
-        el.textContent = cur;
-        if (cur < end) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-      obs.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  els.forEach(el => obs.observe(el));
-}
-
-// ── ANIMAÇÕES DE ENTRADA ──
-function initAnimations() {
-  // Hero animations on load
-  setTimeout(() => {
-    document.querySelectorAll('.animate-in').forEach((el, i) => {
-      setTimeout(() => el.classList.add('show'), i * 120);
-    });
-  }, 200);
-
-  // Scroll reveals
-  const obs = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }),
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-}
-
-// ── ESTRELAS CANVAS ──
+// =====================================================
+// ESTRELAS ANIMADAS
+// =====================================================
 function initStars() {
-  const canvas = document.getElementById('stars');
+  const canvas = document.getElementById('starsCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  let stars = [];
 
   function resize() {
-    canvas.width  = window.innerWidth;
+    canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    createStars();
   }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
 
-  const COUNT = 220;
-  const stars = Array.from({ length: COUNT }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.4 + 0.2,
-    a: Math.random(),
-    da: (Math.random() * 0.006 + 0.002) * (Math.random() > .5 ? 1 : -1),
-  }));
-
-  // Shooting stars
-  const shoots = [];
-  function addShoot() {
-    shoots.push({
-      x: Math.random() * canvas.width * 0.6,
-      y: Math.random() * canvas.height * 0.4,
-      len: Math.random() * 120 + 60,
-      speed: Math.random() * 8 + 4,
-      a: 1,
-      angle: Math.PI / 4 + (Math.random() - .5) * 0.3,
-    });
-    setTimeout(addShoot, Math.random() * 8000 + 4000);
+  function createStars() {
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 4000);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.2,
+        alpha: Math.random() * 0.8 + 0.2,
+        speed: Math.random() * 0.003 + 0.001,
+        phase: Math.random() * Math.PI * 2,
+        gold: Math.random() < 0.08
+      });
+    }
   }
-  setTimeout(addShoot, 3000);
 
+  let frame = 0;
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Stars
+    frame++;
     stars.forEach(s => {
-      s.a += s.da;
-      if (s.a > 1) { s.a = 1; s.da = -Math.abs(s.da); }
-      if (s.a < .05) { s.a = .05; s.da = Math.abs(s.da); }
+      const twinkle = Math.sin(frame * s.speed + s.phase) * 0.4 + 0.6;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,240,${s.a})`;
+      ctx.fillStyle = s.gold
+        ? `rgba(201,168,76,${s.alpha * twinkle})`
+        : `rgba(255,255,255,${s.alpha * twinkle})`;
       ctx.fill();
     });
-
-    // Shooting stars
-    for (let i = shoots.length - 1; i >= 0; i--) {
-      const s = shoots[i];
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      ctx.lineTo(s.x - Math.cos(s.angle) * s.len, s.y - Math.sin(s.angle) * s.len);
-      const grad = ctx.createLinearGradient(
-        s.x, s.y,
-        s.x - Math.cos(s.angle) * s.len,
-        s.y - Math.sin(s.angle) * s.len
-      );
-      grad.addColorStop(0, `rgba(201,168,76,${s.a})`);
-      grad.addColorStop(1, 'rgba(201,168,76,0)');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-      s.x += Math.cos(s.angle) * s.speed;
-      s.y += Math.sin(s.angle) * s.speed;
-      s.a -= 0.018;
-      if (s.a <= 0) shoots.splice(i, 1);
-    }
-
     requestAnimationFrame(draw);
   }
+
+  resize();
+  window.addEventListener('resize', resize);
   draw();
 }
 
-// ── CSS EXTRA: cabeçalho de parte na lista ──
-const extraCSS = `
-.chap-part-header {
-  padding: 10px 24px 6px;
-  font-family: 'Cinzel', serif;
-  font-size: .68rem;
-  color: rgba(201,168,76,.55);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(201,168,76,.08);
-  margin-top: 6px;
-}
-`;
-const styleEl = document.createElement('style');
-styleEl.textContent = extraCSS;
-document.head.appendChild(styleEl);
+// =====================================================
+// PARTÍCULAS DOURADAS
+// =====================================================
+function initParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
 
-console.log('%c✦ A Mão Esquerda do Cosmos — Herdeiros da Luz', 'color:#c9a84c;font-size:15px;font-weight:bold;');
-console.log('%c© Nélio Correia da Silva Filho | @tzadkel', 'color:#4fc3f7;font-size:12px;');
+  function createParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 3 + 1;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${size}px;
+      height: ${size}px;
+      animation-duration: ${Math.random() * 15 + 8}s;
+      animation-delay: ${Math.random() * 8}s;
+      opacity: 0;
+    `;
+    container.appendChild(p);
+    setTimeout(() => p.remove(), 25000);
+  }
+
+  setInterval(createParticle, 800);
+  for (let i = 0; i < 8; i++) createParticle();
+}
+
+// =====================================================
+// NAVBAR
+// =====================================================
+function initNavbar() {
+  const navbar = document.getElementById('navbar');
+  const menuBtn = document.getElementById('menuBtn');
+  const navMobile = document.getElementById('navMobile');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      navMobile.classList.toggle('open');
+    });
+  }
+}
+
+window.closeMobile = function () {
+  const navMobile = document.getElementById('navMobile');
+  if (navMobile) navMobile.classList.remove('open');
+};
+
+// =====================================================
+// LISTA DE CAPÍTULOS
+// =====================================================
+function initChaptersList() {
+  const list = document.getElementById('chaptersList');
+  if (!list) return;
+  renderChapters(CHAPTERS);
+}
+
+function renderChapters(chapters) {
+  const list = document.getElementById('chaptersList');
+  if (!list) return;
+
+  list.innerHTML = chapters.map((ch, idx) => {
+    const globalIdx = CHAPTERS.findIndex(c => c.num === ch.num);
+    const audioSrc = getAudioSrc(ch.num);
+    const hasAudio = !!audioSrc;
+    return `
+      <div class="chapter-item ${globalIdx === currentChapterIdx ? 'active' : ''} ${!hasAudio ? 'no-audio' : ''}"
+           id="cap-${ch.num}"
+           onclick="loadChapter(${globalIdx}, true)">
+        <span class="chapter-num">Cap. ${String(ch.num).padStart(3,'0')}</span>
+        <span class="chapter-name">${ch.title}</span>
+        <span class="chapter-play">
+          ${globalIdx === currentChapterIdx && isPlaying
+            ? '<i class="fas fa-pause"></i>'
+            : '<i class="fas fa-play"></i>'}
+        </span>
+      </div>
+    `;
+  }).join('');
+}
+
+window.filterChapters = function () {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = CHAPTERS.filter(ch =>
+    ch.title.toLowerCase().includes(q) ||
+    String(ch.num).includes(q)
+  );
+  renderChapters(filtered);
+};
+
+// =====================================================
+// AUDIO PLAYER
+// =====================================================
+function initAudioPlayer() {
+  audioEl = document.getElementById('audioPlayer');
+  if (!audioEl) return;
+
+  audioEl.volume = 0.8;
+
+  audioEl.addEventListener('timeupdate', updateProgress);
+  audioEl.addEventListener('loadedmetadata', updateDuration);
+  audioEl.addEventListener('ended', () => {
+    isPlaying = false;
+    updatePlayIcons();
+    if (currentChapterIdx < CHAPTERS.length - 1) {
+      setTimeout(() => loadChapter(currentChapterIdx + 1, true), 1000);
+    }
+  });
+  audioEl.addEventListener('error', (e) => {
+    console.warn('Áudio não disponível para este capítulo.');
+    updateNoAudioUI();
+  });
+  audioEl.addEventListener('play', () => {
+    isPlaying = true;
+    updatePlayIcons();
+  });
+  audioEl.addEventListener('pause', () => {
+    isPlaying = false;
+    updatePlayIcons();
+  });
+}
+
+function getAudioSrc(num) {
+  // Nomes possíveis de arquivo para cada capítulo
+  const padded = String(num).padStart(3, '0');
+  // Formatos possíveis de nomeação
+  return `/audio/cap${padded}.mp3`;
+}
+
+function loadChapter(idx, autoPlay) {
+  if (idx < 0 || idx >= CHAPTERS.length) return;
+
+  currentChapterIdx = idx;
+  const ch = CHAPTERS[idx];
+  const src = getAudioSrc(ch.num);
+
+  // Atualiza UI do player
+  const titleEl = document.getElementById('playerTitle');
+  if (titleEl) titleEl.textContent = `Capítulo ${ch.num} — ${ch.title}`;
+
+  // Tenta carregar o áudio
+  if (audioEl) {
+    audioEl.pause();
+    isPlaying = false;
+
+    // Tenta os dois formatos mais comuns
+    const sources = [
+      `/audio/cap${String(ch.num).padStart(3,'0')}.mp3`,
+      `/audio/cap${String(ch.num).padStart(3,'0')}.ogg`,
+      `/audio/${String(ch.num).padStart(3,'0')}.mp3`,
+      `/audio/capitulo_${String(ch.num).padStart(3,'0')}.mp3`,
+      `/audio/capitulo${String(ch.num).padStart(3,'0')}.mp3`,
+    ];
+
+    audioEl.src = sources[0];
+    audioEl.load();
+
+    if (autoPlay) {
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          updatePlayIcons();
+        }).catch(() => {
+          // Áudio não disponível
+          updateNoAudioUI();
+        });
+      }
+    }
+  }
+
+  // Scroll para o capítulo na lista
+  const capEl = document.getElementById(`cap-${ch.num}`);
+  if (capEl) {
+    capEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Re-renderizar lista para atualizar ativo
+  const q = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+  const filtered = q
+    ? CHAPTERS.filter(c => c.title.toLowerCase().includes(q) || String(c.num).includes(q))
+    : CHAPTERS;
+  renderChapters(filtered);
+}
+
+function updateNoAudioUI() {
+  isPlaying = false;
+  updatePlayIcons();
+  const titleEl = document.getElementById('playerTitle');
+  const ch = CHAPTERS[currentChapterIdx];
+  if (titleEl) {
+    titleEl.textContent = `Cap. ${ch.num} — ${ch.title} (Áudio não disponível)`;
+  }
+}
+
+window.togglePlay = function () {
+  if (!audioEl) return;
+  if (audioEl.paused) {
+    const p = audioEl.play();
+    if (p !== undefined) {
+      p.then(() => {
+        isPlaying = true;
+        updatePlayIcons();
+      }).catch(() => {
+        showNoAudioAlert();
+      });
+    }
+  } else {
+    audioEl.pause();
+  }
+};
+
+function showNoAudioAlert() {
+  const notice = document.querySelector('.audiobook-notice');
+  if (notice) {
+    notice.style.border = '1px solid rgba(201,168,76,0.6)';
+    notice.style.background = 'rgba(201,168,76,0.1)';
+    notice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    setTimeout(() => {
+      notice.style.border = '';
+      notice.style.background = '';
+    }, 3000);
+  }
+}
+
+window.prevChapter = function () {
+  if (currentChapterIdx > 0) loadChapter(currentChapterIdx - 1, isPlaying);
+};
+
+window.nextChapter = function () {
+  if (currentChapterIdx < CHAPTERS.length - 1) loadChapter(currentChapterIdx + 1, isPlaying);
+};
+
+window.rewind = function () {
+  if (audioEl) audioEl.currentTime = Math.max(0, audioEl.currentTime - 15);
+};
+
+window.forward = function () {
+  if (audioEl) audioEl.currentTime = Math.min(audioEl.duration || 0, audioEl.currentTime + 15);
+};
+
+window.setVolume = function (val) {
+  if (audioEl) audioEl.volume = parseFloat(val);
+};
+
+window.toggleMute = function () {
+  if (audioEl) {
+    audioEl.muted = !audioEl.muted;
+    const icon = document.querySelector('.volume-wrap i');
+    if (icon) {
+      icon.className = audioEl.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+    }
+  }
+};
+
+window.setSpeed = function (val) {
+  if (audioEl) audioEl.playbackRate = parseFloat(val);
+};
+
+window.seekAudio = function (e) {
+  if (!audioEl || !audioEl.duration) return;
+  const bar = document.getElementById('progressBar');
+  if (!bar) return;
+  const rect = bar.getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  audioEl.currentTime = ratio * audioEl.duration;
+};
+
+function updateProgress() {
+  if (!audioEl || !audioEl.duration) return;
+  const pct = (audioEl.currentTime / audioEl.duration) * 100;
+  const fill = document.getElementById('progressFill');
+  const thumb = document.getElementById('progressThumb');
+  const cur = document.getElementById('currentTime');
+  if (fill) fill.style.width = pct + '%';
+  if (thumb) thumb.style.left = pct + '%';
+  if (cur) cur.textContent = formatTime(audioEl.currentTime);
+}
+
+function updateDuration() {
+  if (!audioEl) return;
+  const tot = document.getElementById('totalTime');
+  if (tot) tot.textContent = formatTime(audioEl.duration);
+}
+
+function updatePlayIcons() {
+  const icon1 = document.getElementById('playIcon');
+  const icon2 = document.getElementById('playBigIcon');
+  const cls = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+  if (icon1) icon1.className = cls;
+  if (icon2) icon2.className = cls;
+
+  // Atualizar ícone no capítulo ativo
+  const activeItems = document.querySelectorAll('.chapter-item.active .chapter-play i');
+  activeItems.forEach(i => {
+    i.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+  });
+}
+
+function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+// =====================================================
+// SCROLL ANIMATIONS
+// =====================================================
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  const animated = document.querySelectorAll(
+    '.parte-card, .personagem, .formato-card, .loja-card, .sobre-quote, .autor-bio p'
+  );
+  animated.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.6s ease ${i * 0.05}s, transform 0.6s ease ${i * 0.05}s`;
+    observer.observe(el);
+  });
+
+  document.addEventListener('animationend', () => {}, false);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('scroll', () => {
+    document.querySelectorAll('.parte-card, .personagem, .formato-card, .loja-card').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }
+    });
+  });
+});
